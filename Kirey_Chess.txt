@@ -1,0 +1,43 @@
+Exercise: Kirey Chess
+
+The goal of the exercise is to recreate a game similar to chess, but with pieces that can move according to user-defined patterns.
+
+At the beginning of the game each player (to simplify things, we expect that there are 2) will have a container, which will contain all the pieces that he can use during the game. These pieces will be present in a structure, defined by an external file (if possible of the xml type, otherwise a simple txt file), and will be gradually proposed to the user, who will decide where to place them on the board. They cannot be placed where another pawn is already present.
+The container may have two types of access:
+- sequential (queue), in which the container itself provides the user with the next piece to be placed on the chessboard
+- map, in which the user asks for the next type of piece that the user wants to have
+The type of access will be configured in the settings.properties file
+
+In turn, each user will place a piece on the chessboard, writing its coordinates (eg: G2, B1 ...). When all the pieces are placed, the first user can start moving the pieces, indicating the starting square and the ending square.
+
+Each piece must be able to move according to a pattern that he himself will know. The definition of the pattern will therefore be of exclusive knowledge of the piece. The interface that the piece will have with the outside must foresee the starting point in the chessboard, and the arrival point (for example: A1 - C4). The piece will return a true / false value depending on whether it can make that move or not.
+Each piece will also have a color, white or black.
+
+It should be possible to add new types of pieces (when the game is stopped), which can follow patterns of any complexity. For the purpose of the exercise, it is necessary to implement at least:
+- a type (which we will call "line") that can move horizontally or vertically on the game board, as many squares as you want
+- a type (which we will call "line-3"), which can move horizontally or vertically, but only 3 squares or less. This piece must inherit the movement characteristics from the "line" piece, modifying only its property which provides the maximum number of squares it can travel
+- a type (which we will call "single"), who can move only one square, in all directions
+
+When a pawn is placed on top of an opposing player's pawn, the latter will be eliminated from the game.
+Error handling (for example, if you try to place a checker off the board, or on top of your own piece) must be done through Exceptions management.
+Each move made must be written in a text file, the definition of which is present in the file setting.properties.
+The player who will be left with the last piece on the field wins.
+
+It is sufficient that there is a textual interface (from the command line) to interact with the application.
+
+Example of a file containing the indications of the pieces for each user (pieces_container.xml / txt):
+<piece>
+	<type>line</type>
+	<number>2<number>
+</piece>
+<piece>
+	<type>single</type>
+	<number>1<number>
+</piece>
+[...]
+
+Elements contained in the settings.properties file
+- chessboard height
+- chessboard width
+- location of the log file
+- type of access to the parts container
